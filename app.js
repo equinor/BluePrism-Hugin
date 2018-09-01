@@ -1,9 +1,11 @@
+require('dotenv').config({path: __dirname+'/process.env'})
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mssql = require('./config/mssql.js')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
