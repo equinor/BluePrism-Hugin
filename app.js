@@ -1,14 +1,28 @@
 require('dotenv').config({path: __dirname+'/process.env'})
+var sqlConnection = require('./config/mssql.js');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mssql = require('./config/mssql.js')
+
+/** 
+var dbRequest = require('./controllers/dbRequest');
+var models = require('./models/models');
+
+
+setTimeout(function() {
+  models.NewProcess.params[0].value = 7;
+  models.NewProcess.params[1].value = 'PC0032';
+  models.NewProcess.params[2].value = 'Joint venture accounting';
+
+  dbRequest.execSql(models.NewProcess);
+}, 3000);
+*/
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var pipeline = require('./routes/pipeline.js');
 
 var app = express();
 
@@ -25,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/pipeline', pipeline);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

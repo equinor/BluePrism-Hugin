@@ -1,6 +1,4 @@
 const Connection = require('tedious').Connection;
-const Request = require('tedious').Request;
-var connReady = false;
 
 const config = 
     {
@@ -13,7 +11,9 @@ const config =
         }
     }
 
-exports.connection = new Connection(config);
+const connection = new Connection(config);
+
+module.exports = connection
 
 connection.on('connect', function(err)
     {
@@ -23,6 +23,5 @@ connection.on('connect', function(err)
         } else
         {
             console.log('Database ready');
-            connReady = true;
         }
 })
