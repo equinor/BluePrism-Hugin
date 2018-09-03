@@ -7,7 +7,8 @@ const config =
         server: process.env.DB_SERVER,
         options: {
             database: process.env.DB_DATABASE,
-            encrypt: true
+            encrypt: true,
+            rowCollectionOnDone: true
         }
     }
 

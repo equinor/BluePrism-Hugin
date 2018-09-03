@@ -4,9 +4,9 @@ const sqlConnection = require('../config/mssql');
 
 
 // Function for executing INSERT by SQL query or calling stored procuredure
-module.exports.execSql = function execSql (req) {
+module.exports.insertSql = function insertSql (req) {
 
-    var request = new Request(req.sql, function(err) {
+    var request = new Request(req.sqlInsert, function(err) {
         if(err) console.log("Error while executing SQL :" + err);
     });
 
@@ -19,14 +19,25 @@ module.exports.execSql = function execSql (req) {
 }
 
 // Function for getting data from Sql server
-module.exports.getData = function getSql (sql) {
-    var request = new Request(sql, function(err, rowCount) {
-        if(err) {
-            console.log("ee")
-        } else {
-            console.log(rowCount + ' rows returned');
-        }
-    })
+module.exports.getSql = function getSql (req, callback) {    
+    var retVal = [];
+
+    var request = new Request(req.sqlSelectAll, function(err, rowCount) {
+        if(err) console.log("Error while executing SQL :" + err);
+
+    });
+
+    request.on('row', function(columns) {
+        columns.forEach(function(column) {
+            retVal.push(column.value.trim());  
+        })
+    });
+
+    request.on('requestCompleted', function(rowCount, more, rows) {
+        callback(retVal);
+    });
+
+    sqlConnection.execSql(request);
 }
 
 

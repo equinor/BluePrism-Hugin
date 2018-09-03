@@ -7,22 +7,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-/** 
-var dbRequest = require('./controllers/dbRequest');
-var models = require('./models/models');
-
-
-setTimeout(function() {
-  models.NewProcess.params[0].value = 7;
-  models.NewProcess.params[1].value = 'PC0032';
-  models.NewProcess.params[2].value = 'Joint venture accounting';
-
-  dbRequest.execSql(models.NewProcess);
-}, 3000);
-*/
-
 var index = require('./routes/index');
 var pipeline = require('./routes/pipeline.js');
+var bplog = require('./routes/bplog');
 
 var app = express();
 
@@ -40,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/pipeline', pipeline);
+app.use('/bplog', bplog);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

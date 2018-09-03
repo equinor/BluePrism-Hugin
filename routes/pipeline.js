@@ -3,17 +3,21 @@ var router = express.Router();
 var dbRequest = require('../controllers/dbRequest');
 var models = require('../models/models');
 
-/* GET users listing. */
+
 router.post('/', function(req, res) {
-  var Id = req.params('Id');
-  var PCId = req.params('PCId');
-  var ProcessName = req.params('ProcessName');
+  var Id = req.query.Id;
+  var PCId = req.query.PCId;
+  var ProcessName = req.query.ProcessName;
 
-  models.NewProcess.params[0].value = Id;
-  models.NewProcess.params[1].value = PCId;
-  models.NewProcess.params[2].value = ProcessName;
+  models.Process.params[0].value = PCId;
+  models.Process.params[1].value = ProcessName;
 
-  dbRequest.execSql(models.NewProcess);
+  //dbRequest.execSql(models.NewProcess);
+
+  dbRequest.getSql(models.Process, function(resp) {
+    console.log(resp)
+  });
+
   
   res.send('respond with a resource');
 });
