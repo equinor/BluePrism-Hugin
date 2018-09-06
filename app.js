@@ -1,15 +1,19 @@
 require('dotenv').config({path: __dirname+'/process.env'})
 var sqlConnection = require('./config/mssql.js');
 var express = require('express');
+var router = express.Router();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Controllers
+var processItemsCntrl = require('./controllers/processItems')
+
 var index = require('./routes/index');
-var pipeline = require('./routes/pipeline.js');
-var bplog = require('./routes/bplog');
+//var pipeline = require('./routes/pipeline.js');
+//var bplog = require('./routes/bplog');
 
 var app = express();
 
@@ -26,8 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/pipeline', pipeline);
-app.use('/bplog', bplog);
+//app.use('/pipeline', pipeline);
+app.use('/bplog', router.post('/',processItemsCntrl.post));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

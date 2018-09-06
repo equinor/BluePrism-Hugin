@@ -1,7 +1,5 @@
 var Request = require('tedious').Request;
-var models = require('../models/models');
 const sqlConnection = require('../config/mssql');
-
 
 // Function for executing INSERT by SQL query or calling stored procuredure
 module.exports.insertSql = function insertSql (req) {
@@ -12,8 +10,9 @@ module.exports.insertSql = function insertSql (req) {
 
     req.params.forEach(function(param){
         request.addParameter(param.column, param.type, param.value)
-    })
+    });
 
+    console.log(req);
     sqlConnection.execSql(request)
 
 }
