@@ -12,5 +12,6 @@ CREATE TABLE [dbo].[ProcessItems](
        [PCId] [nchar](15) NOT NULL,
        [Message] [nchar](400) NOT NULL,
        [LogCode] [smallint] NOT NULL,
-       [TimeStamp] [smalldatetime] NOT NULL)
+       [TimeStamp] [smalldatetime] NOT NULL,
+       [Environment] [nchar](15) NOT NULL)
 GO

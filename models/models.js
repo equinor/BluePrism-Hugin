@@ -6,7 +6,7 @@ const tables = {
 }
 
 module.exports.ProcessItemsModel = ProcessItemsModel = {
-    sqlInsert: 'INSERT INTO ' + tables.ProcessItems + ' (PCId, LogCode, Message, TimeStamp) VALUES (@PCId, @LogCode, @Message, @TimeStamp)' ,
+    sqlInsert: 'INSERT INTO ' + tables.ProcessItems + ' (PCId, LogCode, Message, TimeStamp, Environment) VALUES (@PCId, @LogCode, @Message, @TimeStamp, @Environment)' ,
     params: [
         {
             column: 'PCId',
@@ -27,7 +27,12 @@ module.exports.ProcessItemsModel = ProcessItemsModel = {
             column: 'TimeStamp',
             type: TYPES.SmallDateTime,
             value: ''
-        }       
+        },
+        {
+            column: 'Environment',
+            type: TYPES.NChar,
+            value: ''
+        }              
     ]
 }
 
