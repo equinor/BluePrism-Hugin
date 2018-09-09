@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  p Deploy new process
+  form
+    div(class='form-group row')
+        label(for='processId' class='col-sm-2 col-form-label') PCId:
+        div(class='col-sm-10')
+            select(class='form-control form-control-sm' id='processId' placeholder='PCId')
+                option PC0001

@@ -12,8 +12,6 @@ var bodyParser = require('body-parser');
 var processItemsCntrl = require('./controllers/processItems')
 
 var index = require('./routes/index');
-//var pipeline = require('./routes/pipeline.js');
-//var bplog = require('./routes/bplog');
 
 var app = express();
 
@@ -30,7 +28,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-//app.use('/pipeline', pipeline);
 app.use('/bplog', router.post('/',processItemsCntrl.post));
 
 // catch 404 and forward to error handler
