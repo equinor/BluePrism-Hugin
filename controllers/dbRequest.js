@@ -45,7 +45,15 @@ module.exports.getSql = function getSql (req, callback) {
         callback(retVal);
     });
 
-    sqlConnection.execSql(request);
+    sqlConnection.on('connect', function(err) {
+        if(!err) {
+            sqlConnection.execSql(request);
+        } else {
+            console.log("Error connecting: " + err);
+        }
+
+    })
+
 }
 
 
