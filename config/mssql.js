@@ -16,13 +16,3 @@ const connection = new Connection(config);
 
 module.exports = connection
 
-connection.on('connect', function(err)
-    {
-        if(err) 
-        {
-            console.log(err);
-        } else
-        {
-            console.log('Database ready');
-        }
-})

@@ -4,18 +4,26 @@ const sqlConnection = require('../config/mssql');
 // Function for executing INSERT by SQL query or calling stored procuredure
 module.exports.insertSql = function insertSql (req) {
 
+    var request = new Request(req.sqlInsert, function(err) {
+        if(err) console.log("Error while executing SQL :" + err);
+    });
+
     req.params.forEach(function(param){
         request.addParameter(param.column, param.type, param.value)
     });
 
-    var request = new Request(req.sqlInsert, function(err) {
-        if(err) {
-            console.log("Error while executing SQL :" + err);
+    console.log(req);
+
+    sqlConnection.on('connect', function(err) {
+        if(!err) {
+            sqlConnection.execSql(request);
         } else {
-            console.log(req);
-            sqlConnection.execSql(request)
+            console.log("Error connecting: " + err);
         }
-    });
+
+    })
+    
+
 }
 
 // Function for getting data from Sql server
