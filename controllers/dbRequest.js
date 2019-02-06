@@ -28,6 +28,10 @@ module.exports.insertSql = function insertSql (req) {
 
     })
 
+    sqlConnection.on('done', function(rowCount, more) {
+        console.log(rowCount + ' rows returned ' + more);
+      });
+
 }
 
 // Function for getting data from Sql server
