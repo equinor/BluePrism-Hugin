@@ -23,6 +23,7 @@ async function post(req, res, next) {
         models.ProcessItemsModel.params[3].value = new Date(item.TimeStamp);
         models.ProcessItemsModel.params[4].value = item.Environment;
         
+        console.log("Inserting into database: ");
         dbRequest.insertSql(models.ProcessItemsModel);
 
         res.status(201).json(item);

@@ -12,9 +12,11 @@ module.exports.insertSql = function insertSql (req) {
         request.addParameter(param.column, param.type, param.value)
     });
 
+    console.log("In insertsql:");
     console.log(req);
 
     sqlConnection.on('connect', function(err) {
+        console.log("In sql connect");
         if(!err) {
             sqlConnection.execSql(request);
         } else {
@@ -22,6 +24,8 @@ module.exports.insertSql = function insertSql (req) {
         }
 
     })
+
+    
     
 
 }
