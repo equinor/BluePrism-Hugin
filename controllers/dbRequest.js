@@ -17,13 +17,11 @@ module.exports.insertSql = function insertSql (req) {
 
     sqlConnection.on('connect', function(err) {
         console.log("SQL connected")
-        console.log(sqlConnection);
+        console.log("Exec sql...");
+        sqlConnection.execSql(request);
 
         if(!err) {
-            console.log("Exec sql...");
-            sqlConnection.execSql(request);
-        } else {
-            console.log("Error connecting: " + err);
+            console.log("Error: " + err);
         }
 
     })
