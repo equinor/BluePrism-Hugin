@@ -16,4 +16,7 @@ const connection = new Connection(config);
 
 module.exports = connection
 
-
+connection.on('debug', function(text) {
+    console.log(text);
+  }
+);
