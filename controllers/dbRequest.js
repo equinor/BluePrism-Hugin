@@ -17,6 +17,7 @@ module.exports.insertSql = function insertSql (req) {
 
     sqlConnection.on('connect', function(err) {
         console.log("In sql connect");
+        console.log(sqlConnection);
         if(!err) {
             sqlConnection.execSql(request);
         } else {
@@ -24,9 +25,6 @@ module.exports.insertSql = function insertSql (req) {
         }
 
     })
-
-    
-    
 
 }
 
